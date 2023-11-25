@@ -30,7 +30,7 @@ const rotate2 = keyframes`
 export const GameCard = styled.div<GameCardProps>`
   width: 160px;
   height: 220px;
-  margin: 20px 0;
+  margin: 20px;
   box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.75);
   cursor: pointer;
   animation: ${({ $check, $movement }) => ($movement || $check ? css`${rotate2} 1s forwards` : css`${rotate} 1s forwards`)};
