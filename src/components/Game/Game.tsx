@@ -3,6 +3,7 @@ import Card from "../Card/Card";
 // Data
 import { images, ICard } from "../../data/images";
 import "./Game.css";
+import Snowfall from 'react-snowfall';
 
 interface GameProps {
   score: number;
@@ -109,6 +110,12 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
 
   return (
     <div className="gameField">
+          <Snowfall
+    snowflakeCount={200}
+    speed={[1, 3]}
+/>
+
+
       {game.map((item, index) => (
         <div key={index}>
           <Card
