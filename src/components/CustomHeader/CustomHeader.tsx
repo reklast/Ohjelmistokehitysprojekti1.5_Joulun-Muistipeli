@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const CustomHeader: React.FC<HeaderProps> = ({ score }) => (
   <Header className="header">
-    <h1>Joulun Muistipeli</h1>
+    <h1> Jouluinen muistipeli</h1>
 
     <p className="score">Score: {score}</p>
   </Header>
