@@ -3,10 +3,11 @@ import Card from "../Card/Card";
 // Data
 import { images, ICard } from "../../data/images";
 import "./Game.css";
+import Snowfall from 'react-snowfall';
 
 interface GameProps {
   score: number;
-  setScore: Function;
+  setScore: (score: number) => void;
 }
 
 type Match = Array<string | null | number>;
@@ -28,8 +29,7 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
   // Start new game
   useEffect(() => {
     if (pairCount === 10) {
-      setScore(score + 1);
-      alert("Onnittelut ja hyvää joulua!");
+      alert("Onnittelut ja Hyvää Joulua!");
       setTimeout(() => {
         const newGame: ICard[] = images.sort(() => Math.random() - 0.5);
         newGame.forEach((item) => {
@@ -47,9 +47,13 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
   useEffect(() => {
     if (cardTwo.length !== 0 && cardOne[0] === cardTwo[0]) {
       setTimeout(() => {
+        // Increment score with each match
+        setScore(score + 1);
+
         setPairCount(pairCount + 1);
         setCardOne([]);
         setCardTwo([]);
+
         game.forEach((item) => {
           if (item.name === cardOne[0]) {
             item.match = true;
@@ -57,42 +61,44 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
         });
       }, 400);
     }
-  }, [cardOne, cardTwo]);
+  }, [cardOne, cardTwo, setScore, score, pairCount, game]);
 
-  const onCoverClick = (event: React.SyntheticEvent, id: number) => {
-    const card = event.currentTarget;
-    const cardName: string | null = card.getAttribute("data-name");
+  const onCoverClick = (id: number) => {
+    const cardName: string | null = game[id].name;
 
     if (cardOne.length === 0) {
       setCardOne([cardName, id]);
-      game.forEach((item, index) => {
-        if (id === index) {
-          item.flipped = true;
-        }
-      });
+      setGame((prevGame) =>
+        prevGame.map((item, index) =>
+          index === id ? { ...item, flipped: true } : item
+        )
+      );
     }
-    // Detect same card click
+
+    // Detect the same card click
     if (cardOne[1] === id) {
-      game.forEach((item) => {
-        item.flipped = false;
-      });
+      setGame((prevGame) =>
+        prevGame.map((item) => ({ ...item, flipped: false }))
+      );
       setCardOne([]);
       setCardTwo([]);
       return false;
     }
-    // Condition to add second card for compare
+
+    // Condition to add the second card for comparison
     if (cardOne.length !== 0) {
       setCardTwo([cardName, id]);
-      game.forEach((item, index) => {
-        if (id === index) {
-          item.flipped = true;
-        }
-      });
-      // False if not match
+      setGame((prevGame) =>
+        prevGame.map((item, index) =>
+          index === id ? { ...item, flipped: true } : item
+        )
+      );
+
+      // False if not a match
       setTimeout(() => {
-        game.forEach((item) => {
-          item.flipped = false;
-        });
+        setGame((prevGame) =>
+          prevGame.map((item) => ({ ...item, flipped: false }))
+        );
         setCardOne([]);
         setCardTwo([]);
         return false;
@@ -104,6 +110,12 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
 
   return (
     <div className="gameField">
+          <Snowfall
+    snowflakeCount={200}
+    speed={[1, 3]}
+/>
+
+
       {game.map((item, index) => (
         <div key={index}>
           <Card
@@ -113,7 +125,7 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
             image={item.pic}
             flipped={item.flipped}
             matched={item.match}
-            onCoverClick={onCoverClick}
+            onCoverClick={() => onCoverClick(index)}
           />
         </div>
       ))}
