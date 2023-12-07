@@ -18,6 +18,7 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
   const [cardOne, setCardOne] = useState<Match>([]);
   const [cardTwo, setCardTwo] = useState<Match>([]);
   const [pairCount, setPairCount] = useState<number>(0);
+  const [timer, setTimer] = useState<number>(60);
 
   // Start first game
   useEffect(() => {
@@ -26,10 +27,33 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
     setTimeout(() => setShowField(false), 2000);
   }, []);
 
+ // Timer countdown effect
+ useEffect(() => {
+  const timerId = setInterval(() => {
+    setTimer((prevTimer) => {
+      if (prevTimer === 1) {
+        // Clear the interval when the timer reaches 0
+        clearInterval(timerId);
+      }
+      return prevTimer - 1;
+    });
+  }, 1000);
+
+  // Clear the interval when the component unmounts
+  return () => clearInterval(timerId);
+}, []);
+
+
+
   // Start new game
   useEffect(() => {
-    if (pairCount === 10) {
-      alert("Onnittelut ja Hyvää Joulua!");
+    if (pairCount === 10 || timer === 0) {
+      alert("Game Over! Your score: " + score);
+      // Reset the timer and game state
+      setTimer(60);
+      setPairCount(0);
+      setScore(0);
+
       setTimeout(() => {
         const newGame: ICard[] = images.sort(() => Math.random() - 0.5);
         newGame.forEach((item) => {
@@ -41,7 +65,7 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
       }, 500);
       setTimeout(() => setShowField(false), 3000);
     }
-  }, [pairCount]);
+  }, [pairCount, timer, setScore, score]);
 
   // Compare cards
   useEffect(() => {
@@ -110,10 +134,8 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
 
   return (
     <div className="gameField">
-          <Snowfall
-    snowflakeCount={200}
-    speed={[1, 3]}
-/>
+          <Snowfall snowflakeCount={200} speed={[1, 3]}/>
+          <div>Timer: {timer} seconds</div>
 
 
       {game.map((item, index) => (
