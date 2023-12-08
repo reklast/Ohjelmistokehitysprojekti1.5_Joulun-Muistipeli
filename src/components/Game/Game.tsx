@@ -4,6 +4,10 @@ import Card from "../Card/Card";
 import { images, ICard } from "../../data/images";
 import "./Game.css";
 import Snowfall from 'react-snowfall';
+import axios from "axios";
+
+
+
 
 interface GameProps {
   score: number;
@@ -20,6 +24,13 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
   const [pairCount, setPairCount] = useState<number>(0);
   const [timer, setTimer] = useState<number>(60);
 
+
+ // Fetch card data from the API
+ useEffect(() => {
+  axios.get("/api/cards")  // Replace "/api/cards" with your actual API endpoint
+    .then(response => setGame(response.data))
+    .catch(error => console.error(error));
+}, []);
   // Start first game
   useEffect(() => {
     const newGame: ICard[] = images.sort(() => Math.random() - 0.5);
@@ -131,6 +142,8 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
 
     return true;
   };
+
+
 
   return (
     <div className="gameField">
