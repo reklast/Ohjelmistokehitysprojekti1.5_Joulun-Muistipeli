@@ -48,7 +48,8 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
     setGame(newGame);
     getBestScore();
     setTimeout(() => setShowField(false), 2000);
-  }, [getBestScore]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Timer countdown effect
   useEffect(() => {
