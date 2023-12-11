@@ -13,7 +13,7 @@ mongoose.connect(process.env.REACT_APP_MONGO, {
   useUnifiedTopology: true,
 });
 
-const playerSchema = require("./models/playerSchema");
+const playerSchema = require("./src/models/playerSchema");
 
 app.use(express.json());
 
