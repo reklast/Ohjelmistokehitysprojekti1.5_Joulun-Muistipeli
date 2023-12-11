@@ -10,14 +10,50 @@
 }
 
 @media (max-width: 645px) {
+  .header{
+  padding: 0 1rem 0 1rem;
+  }
   .header h1 {
     width: 100%;
     font-size: large;
   }
 }
 
-.score {
+@media (max-width: 410px) {
+  .header h1 {
+    width: 100%;
+    font-size: medium;
+  }
+  .scoreWrap {
+    font-size: small;
+  }
+}
+
+@media (max-width: 386px) {
+  .scoreWrap {
+    font-size: smaller;
+  }
+}
+
+.scoreWrap{
+  display: flex;
+  flex-direction: column;
+  margin: 0;
   width: 50%;
+}
+
+.score {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  height: 50%;
+}
+
+.bestScore {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  height: 50%;
 }

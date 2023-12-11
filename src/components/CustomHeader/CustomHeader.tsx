@@ -10,9 +10,10 @@ interface HeaderProps {
 const CustomHeader: React.FC<HeaderProps> = ({ score, bestScore }) => (
   <Header className="header">
     <h1> Jouluinen muistipeli</h1>
-
-    <p className="score">Current Score: {score}</p>
-    <p className="bestScore">Best Score: {bestScore}</p>
+    <div className="scoreWrap">
+      <p className="score">Current Score: {score}</p>
+      <p className="bestScore">Best Score: {bestScore}</p>
+    </div>
   </Header>
 );
 
