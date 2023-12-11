@@ -26,6 +26,7 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
   const [timer, setTimer] = useState<number>(60);
 
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateBestScore = async () => {
     try {
       console.log(bestScore);
@@ -47,7 +48,7 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
     setGame(newGame);
     getBestScore();
     setTimeout(() => setShowField(false), 2000);
-  }, []);
+  }, [getBestScore]);
 
   // Timer countdown effect
   useEffect(() => {
@@ -71,6 +72,7 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
   useEffect(() => {
     if (pairCount === 10) {
       alert("Congratulations! Your score: " + score);
+      setPairCount(0);
       // Reset the timer and game state
       setTimer(60);
 
@@ -119,7 +121,7 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
       }, 500);
       setTimeout(() => setShowField(false), 3000);
     }
-  }, [pairCount, timer, setScore, score, bestScore]);
+  }, [pairCount, timer, setScore, score, bestScore, setBestScore, updateBestScore]);
 
   // Compare cards
   useEffect(() => {
@@ -191,7 +193,7 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
   return (
     <div className="gameField">
       <Snowfall snowflakeCount={200} speed={[1, 3]} />
-      <div>Timer: {timer} seconds</div>
+      <div className="timer">Timer: {timer} seconds</div>
 
 
       {game.map((item, index) => (

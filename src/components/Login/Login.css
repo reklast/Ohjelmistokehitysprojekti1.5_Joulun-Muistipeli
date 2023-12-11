@@ -3,8 +3,38 @@
     max-width: 400px;
     margin: 30vh auto;
     padding: 30px;
-    border-radius: 5px;
-    color: white;
     text-align: center;
-    background: linear-gradient(to top, #2C5364, #203A43, #0F2027);
+    color: #f4f0bb;
+}
+
+.loginForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm form label, input, button{
+    margin-bottom: 1rem;
+}
+
+.loginForm input {
+    border-radius: 1rem;
+    border: none;
+    background-color: #154434;
+    color: #f4f0bb;
+    padding: 0.7rem;
+}
+
+.submitBtn {
+    border: none;
+    border-radius: 2rem;
+    color: #f4f0bb;
+    background-color: #da2c38;
+    padding: 0.5rem;
+    transition: 0.3s;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.submitBtn:hover {
+    background-color: #aa1f28;
 }

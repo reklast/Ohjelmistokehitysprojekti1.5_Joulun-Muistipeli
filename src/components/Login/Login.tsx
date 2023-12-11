@@ -1,5 +1,7 @@
 import React from 'react';
 
+import "./Login.css";
+
 
 interface LoginProps {
   getName: Function
@@ -40,7 +42,7 @@ const Login: React.FC<LoginProps> = ({ getName, onLogin, playerName }) => {
             onChange={getPlayerName}
           />
           <button
-            className="sumbitBtn"
+            className="submitBtn"
             type="submit"
           >
             Submit
