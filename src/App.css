@@ -3,3 +3,9 @@
   display: flex;
   flex-direction: column;
 }
+
+.gameWrap {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
