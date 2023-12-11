@@ -9,6 +9,13 @@
   width: 50%;
 }
 
+@media (max-width: 645px) {
+  .header h1 {
+    width: 100%;
+    font-size: large;
+  }
+}
+
 .score {
   width: 50%;
   display: flex;

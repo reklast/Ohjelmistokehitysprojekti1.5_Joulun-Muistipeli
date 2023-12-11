@@ -38,8 +38,7 @@ export const GameCard = styled.div<GameCardProps>`
   visibility: ${({ $match }) => ($match ? 'hidden' : 'visible')};
 
   @media (max-width: 780px) {
-    width: 100%;
-    max-width: 130px;
-    height: 180px;
+    max-width: 80px;
+    height: 110px;
   }
 `;

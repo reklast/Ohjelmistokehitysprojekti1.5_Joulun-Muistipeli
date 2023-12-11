@@ -195,8 +195,8 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
 
 
       {game.map((item, index) => (
-        <div key={index}>
           <Card
+            key={index}
             id={index}
             animation={showField}
             name={item.name}
@@ -205,7 +205,6 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
             matched={item.match}
             onCoverClick={() => onCoverClick(index)}
           />
-        </div>
       ))}
     </div>
   );
