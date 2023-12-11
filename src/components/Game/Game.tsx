@@ -4,19 +4,20 @@ import Card from "../Card/Card";
 import { images, ICard } from "../../data/images";
 import "./Game.css";
 import Snowfall from 'react-snowfall';
-import axios from "axios";
-
-
 
 
 interface GameProps {
   score: number;
+  bestScore: string;
+  setBestScore: (score: string) => void;
   setScore: (score: number) => void;
+  getBestScore: () => Promise<void>;
+  userName: string;
 }
 
 type Match = Array<string | null | number>;
 
-const Game: React.FC<GameProps> = ({ setScore, score }) => {
+const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestScore, score, userName }) => {
   const [game, setGame] = useState<ICard[]>([]);
   const [showField, setShowField] = useState<boolean>(true);
   const [cardOne, setCardOne] = useState<Match>([]);
@@ -25,45 +26,58 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
   const [timer, setTimer] = useState<number>(60);
 
 
- // Fetch card data from the API
- useEffect(() => {
-  axios.get("/api/cards")  // Replace "/api/cards" with your actual API endpoint
-    .then(response => setGame(response.data))
-    .catch(error => console.error(error));
-}, []);
+  const updateBestScore = async () => {
+    try {
+      console.log(bestScore);
+      await fetch('http://localhost:5000/setBestScore', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: userName, newBestScore: score }),
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   // Start first game
   useEffect(() => {
     const newGame: ICard[] = images.sort(() => Math.random() - 0.5);
     setGame(newGame);
+    getBestScore();
     setTimeout(() => setShowField(false), 2000);
   }, []);
 
- // Timer countdown effect
- useEffect(() => {
-  const timerId = setInterval(() => {
-    setTimer((prevTimer) => {
-      if (prevTimer === 1) {
-        // Clear the interval when the timer reaches 0
-        clearInterval(timerId);
-      }
-      return prevTimer - 1;
-    });
-  }, 1000);
+  // Timer countdown effect
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTimer((prevTimer) => {
+        if (prevTimer === 1) {
+          // Clear the interval when the timer reaches 0
+          clearInterval(timerId);
+        }
+        return prevTimer - 1;
+      });
+    }, 1000);
 
-  // Clear the interval when the component unmounts
-  return () => clearInterval(timerId);
-}, []);
+    // Clear the interval when the component unmounts
+    return () => clearInterval(timerId);
+  }, []);
 
 
 
   // Start new game
   useEffect(() => {
-    if (pairCount === 10 || timer === 0) {
-      alert("Game Over! Your score: " + score);
+    if (pairCount === 10) {
+      alert("Congratulations! Your score: " + score);
       // Reset the timer and game state
       setTimer(60);
-      setPairCount(0);
-      setScore(0);
+
+      if (score > Number(bestScore)) {
+        setBestScore(score.toString());
+        updateBestScore();
+      }
 
       setTimeout(() => {
         const newGame: ICard[] = images.sort(() => Math.random() - 0.5);
@@ -76,7 +90,36 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
       }, 500);
       setTimeout(() => setShowField(false), 3000);
     }
-  }, [pairCount, timer, setScore, score]);
+    if (pairCount < 10 && timer === 0) {
+      alert("Game Over! Your score: " + score); //Don't forget to add setScore(0);
+      setTimer(60);
+
+      if(score > Number(bestScore)) {
+        setBestScore(score.toString());
+        updateBestScore();
+      }
+
+      setScore(0);
+
+      const timerId = setInterval(() => {
+        setTimer((prevTimer) => {
+          prevTimer === 1 && clearInterval(timerId);
+          return prevTimer - 1;
+        });
+      }, 1000);
+
+      setTimeout(() => {
+        const newGame: ICard[] = images.sort(() => Math.random() - 0.5);
+        newGame.forEach((item) => {
+          item.match = false;
+        });
+        setGame(newGame);
+        setShowField(true);
+        setPairCount(0);
+      }, 500);
+      setTimeout(() => setShowField(false), 3000);
+    }
+  }, [pairCount, timer, setScore, score, bestScore]);
 
   // Compare cards
   useEffect(() => {
@@ -147,8 +190,8 @@ const Game: React.FC<GameProps> = ({ setScore, score }) => {
 
   return (
     <div className="gameField">
-          <Snowfall snowflakeCount={200} speed={[1, 3]}/>
-          <div>Timer: {timer} seconds</div>
+      <Snowfall snowflakeCount={200} speed={[1, 3]} />
+      <div>Timer: {timer} seconds</div>
 
 
       {game.map((item, index) => (
