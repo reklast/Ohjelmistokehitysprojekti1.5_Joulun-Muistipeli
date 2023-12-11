@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const PORT = process.env.REACT_APP_PORT || 5000;
 
+const cors = require("cors");
+
 require("dotenv").config();
 
 
@@ -16,6 +18,7 @@ mongoose.connect(process.env.REACT_APP_MONGO, {
 const playerSchema = require("./src/models/playerSchema");
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/items", async (req, res) => {
   try {
