@@ -5,6 +5,14 @@ import CustomFooter from "./components/CustomFooter/CustomFooter";
 import CustomHeader from "./components/CustomHeader/CustomHeader";
 import Game from "./components/Game/Game";
 import Login from "./components/Login/Login";
+import { AudioPlayer } from "./components/soundReact/audioplayer";
+
+
+const audio = {
+  url: "https://soundcloud.com/michaelbuble/michael-bubl-its-beginning-to?in=dandounah/sets/chrismas-music",
+  title: "Christmas Songs",
+
+};
 
 function App() {
   const [gameScore, setGameScore] = useState<number>(0);
@@ -57,7 +65,12 @@ function App() {
             <Game score={gameScore} setScore={setGameScore} bestScore={bestScore} getBestScore={getBestScore} setBestScore={setBestScore} userName={userName} />
           )}
       </div>
+    
       <CustomFooter />
+      <AudioPlayer
+          url={audio.url}
+          title={audio.title}
+        />
     </div>
   );
 }
