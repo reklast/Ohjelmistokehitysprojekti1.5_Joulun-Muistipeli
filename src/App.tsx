@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 import "./App.css";
+
 import CustomFooter from "./components/CustomFooter/CustomFooter";
 import CustomHeader from "./components/CustomHeader/CustomHeader";
 import Game from "./components/Game/Game";
 import Login from "./components/Login/Login";
+import AudioButton from "./components/AudioButton/AudioButton";
 
 function App() {
   const [gameScore, setGameScore] = useState<number>(0);
@@ -13,7 +15,7 @@ function App() {
   const [bestScore, setBestScore] = useState<string>('0');
 
   const setName = (value: string) => {
-    setUserName(value);  
+    setUserName(value);
   }
 
   const setLogin = () => {
@@ -24,22 +26,22 @@ function App() {
 
   const getBestScore = async () => {
     try {
-    const response = await fetch('http://localhost:5000/getPlayersScore', {
-      method: "POST",
-      headers: {
+      const response = await fetch('http://localhost:5000/getPlayersScore', {
+        method: "POST",
+        headers: {
           "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: userName })
-    });
-    
-    response.json().then((value) => {
-      setBestScore(value);
-      return value;
-    })
-  } catch(e) {
-    console.log(e);
+        },
+        body: JSON.stringify({ name: userName })
+      });
+
+      response.json().then((value) => {
+        setBestScore(value);
+        return value;
+      })
+    } catch (e) {
+      console.log(e);
+    }
   }
-}
 
   return (
     <div className="mainWrap">
@@ -56,6 +58,7 @@ function App() {
           (
             <Game score={gameScore} setScore={setGameScore} bestScore={bestScore} getBestScore={getBestScore} setBestScore={setBestScore} userName={userName} />
           )}
+        <AudioButton />
       </div>
       <CustomFooter />
     </div>
