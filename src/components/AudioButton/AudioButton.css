@@ -1,0 +1,9 @@
+.audioButton {
+    right: 5rem;
+    bottom: 10rem;
+    background-color: #c4c193;
+  }
+
+.audioButton .ant-float-btn-body {
+    background-color: #f4f0bb;
+}

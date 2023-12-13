@@ -6,13 +6,16 @@ function CustomFooter() {
   return (
     <Footer className="footer">
       <div className="footerContent">
-        <h1>Made By</h1>
-        <p className="authors">
-          <a href="https://github.com/reklast">Nikita</a>
-          &
-          <a href="https://github.com/marionum">Maria</a>
-        </p>
+        <div className="authorsWrap">
+          <h1>Made By</h1>
+          <p className="authors">
+            <a href="https://github.com/reklast">Nikita</a>
+            &
+            <a href="https://github.com/marionum">Maria</a>
+          </p>
+        </div>
       </div>
+
     </Footer>
   );
 }
