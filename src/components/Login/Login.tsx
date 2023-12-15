@@ -17,7 +17,7 @@ const Login: React.FC<LoginProps> = ({ getName, onLogin, playerName }) => {
   const onLoginHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     try{
-        await fetch('http://localhost:5000/createPlayer', {
+        await fetch('https://express-server-memory-game-740e1bbada2c.herokuapp.com/createPlayer', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

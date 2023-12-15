@@ -26,7 +26,7 @@ function App() {
 
   const getBestScore = async () => {
     try {
-      const response = await fetch('http://localhost:5000/getPlayersScore', {
+      const response = await fetch('https://express-server-memory-game-740e1bbada2c.herokuapp.com/getPlayersScore', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
