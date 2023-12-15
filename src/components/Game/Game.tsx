@@ -30,7 +30,7 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
   const updateBestScore = async () => {
     try {
       console.log(bestScore);
-      await fetch('http://localhost:5000/setBestScore', {
+      await fetch('https://express-server-memory-game-740e1bbada2c.herokuapp.com/setBestScore', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const Game: React.FC<GameProps> = ({ setScore, setBestScore, getBestScore, bestS
       setTimeout(() => setShowField(false), 3000);
     }
     if (pairCount < 10 && timer === 0) {
-      alert("Game Over! Your score: " + score); //Don't forget to add setScore(0);
+      alert("Game Over! Your score: " + score);
       setTimer(60);
 
       if(score > Number(bestScore)) {
