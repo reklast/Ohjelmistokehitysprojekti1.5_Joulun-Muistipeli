@@ -4,6 +4,34 @@
     background-color: #c4c193;
   }
 
+  @media (max-width: 1080px) {
+    .audioButton {
+      bottom: 4rem;
+      right: 3rem;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .audioButton {
+      bottom: 4rem;
+      right: 1rem;
+    }
+  }
+
+  @media (max-width: 510px) {
+    .audioButton {
+      bottom: 5rem;
+      right: 0.7rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .audioButton {
+      bottom: 5rem;
+      right: 0.28rem;
+    }
+  }
+ 
 .audioButton .ant-float-btn-body {
     background-color: #f4f0bb;
 }
