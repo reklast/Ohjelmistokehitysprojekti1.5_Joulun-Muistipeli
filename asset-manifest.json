@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/css/main.fd7d7e00.css",
-    "main.js": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/js/main.973e4042.js",
+    "main.js": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/js/main.55081302.js",
     "static/js/845.55d4e0a5.chunk.js": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/js/845.55d4e0a5.chunk.js",
     "static/js/787.5ca94bc7.chunk.js": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/js/787.5ca94bc7.chunk.js",
     "static/media/joyful-snowman.mp3": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/media/joyful-snowman.0ee481d660118757c427.mp3",
@@ -18,12 +18,12 @@
     "static/media/3.jpg": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/media/3.88315245850db3e0acf8.jpg",
     "index.html": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/index.html",
     "main.fd7d7e00.css.map": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/css/main.fd7d7e00.css.map",
-    "main.973e4042.js.map": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/js/main.973e4042.js.map",
+    "main.55081302.js.map": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/js/main.55081302.js.map",
     "845.55d4e0a5.chunk.js.map": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/js/845.55d4e0a5.chunk.js.map",
     "787.5ca94bc7.chunk.js.map": "/Ohjelmistokehitysprojekti1.5_Joulun-Muistipeli/static/js/787.5ca94bc7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fd7d7e00.css",
-    "static/js/main.973e4042.js"
+    "static/js/main.55081302.js"
   ]
 }
